@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/favicon.png">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List Feature 1 - Backend Simulation</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+    .todo-container { background: white; padding: 20px; border-radius: 8px; width: 350px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 10px; background: #eee; margin-bottom: 5px; border-radius: 4px; display: flex; justify-content: space-between; }
+  </style>
 </head>
-
 <body>
-  <h2 class="heading">
-    Clock
-  </h2>
-  <div class="clock">
-    <div class="hour">
-      <div class="hr" id="hr"></div>
-    </div>
-    <div class="min">
-      <div class="mn" id="mn"></div>
-    </div>
-    <div class="sec">
-      <div class="sc" id="sc"></div>
-    </div>
-  </div>
 
+<div class="todo-container">
+  <h2>Todo List (Backend Simulation)</h2>
+  <input type="text" id="taskInput" placeholder="Enter new todo">
+  <button onclick="addTodo()">Add</button>
 
+  <ul id="todoList"></ul>
+</div>
 
-  <footer>
-    <p>&#x3c; &#47; &#x3e; with ❤️ by
-      <a href="https://swapnilsparsh.github.io/">Swapnil Srivastava</a>
-      <br>
-      <a href="https://github.com/swapnilsparsh/30DaysOfJavaScript" target="_blank">#30DaysOfJavaScript
-      </a>
-    </p>
-  </footer>
+<script>
+  // ===== Feature 1: Backend simulation with JS =====
 
-  <script type="text/javascript">
-    const deg = 6;
-    // getting all hands of clock from html through id
-    const hr = document.querySelector('#hr')
-    const mn = document.querySelector('#mn');
-    const sc = document.querySelector('#sc');
+  // In-memory array to store todos
+  let todos = [
+    { id: 1, task: "Learn JavaScript" },
+    { id: 2, task: "Build a project" },
+    { id: 3, task: "Practice coding" }
+  ];
 
-    setInterval(() => {
-      let day = new Date();
+  // Function to render todos
+  function renderTodos() {
+    const list = document.getElementById("todoList");
+    list.innerHTML = "";
+    todos.forEach(todo => {
+      const li = document.createElement("li");
+      li.innerHTML = `<span>${todo.task}</span>
+                      <button onclick="deleteTodo(${todo.id})">Delete</button>`;
+      list.appendChild(li);
+    });
+  }
 
-      //setting the actual seconds minutes and hour in clock
+  // Add a new todo
+  function addTodo() {
+    const taskInput = document.getElementById("taskInput");
+    const task = taskInput.value.trim();
+    if (task === "") return;
+    todos.push({ id: Date.now(), task });
+    taskInput.value = "";
+    renderTodos();
+  }
 
-      let ms = day.getMilliseconds() * deg;
-      let hh = day.getHours() * 30;
-      let mm = day.getMinutes() * deg;
-      let ss = day.getSeconds() * deg + ms / 1000;
+  // Delete a todo
+  function deleteTodo(id) {
+    todos = todos.filter(todo => todo.id !== id);
+    renderTodos();
+  }
 
-      //changing the degrees in the style as per the time
+  // Initial render
+  renderTodos();
+</script>
 
-      hr.style.transform = `rotateZ(${(hh) + (mm / 12)}deg)`;
-      mn.style.transform = `rotateZ(${mm}deg)`;
-      sc.style.transform = `rotateZ(${ss}deg)`;
-
-    }, 1);
-  </script>
 </body>
-
 </html>
