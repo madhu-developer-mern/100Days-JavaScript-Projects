@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List Feature 1 - Backend Simulation</title>
-  <style>
-    body { font-family: Arial; background: #f4f4f4; padding: 20px; }
-    .todo-container { background: white; padding: 20px; border-radius: 8px; width: 350px; }
-    ul { list-style: none; padding: 0; }
-    li { padding: 10px; background: #eee; margin-bottom: 5px; border-radius: 4px; display: flex; justify-content: space-between; }
-  </style>
-</head>
-<body>
-
-<div class="todo-container">
-  <h2>Todo List (Backend Simulation)</h2>
-  <input type="text" id="taskInput" placeholder="Enter new todo">
-  <button onclick="addTodo()">Add</button>
-
-  <ul id="todoList"></ul>
-</div>
-
-<script>
-  // Add a completed flag
+// Add a completed flag
 let todos = [
   { id: 1, task: "Learn JavaScript", completed: false },
   { id: 2, task: "Build a project", completed: false },
@@ -70,8 +46,3 @@ function deleteTodo(id) {
 
 // Initial render
 renderTodos();
-
-</script>
-
-</body>
-</html>
